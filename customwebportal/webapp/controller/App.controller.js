@@ -36,7 +36,7 @@ sap.ui.define([
 						subtitle: "HR resources",
 						url: "https://topas.cherrywork.com/home/dashboard",
 						icon: "sap-icon://employee",
-						embedMode: "auto",
+						embedMode: "newtab",
 						active: true
 					}
 				]
