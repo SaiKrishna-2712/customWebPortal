@@ -1,21 +1,30 @@
-<mvc:View 
-    controllerName="com.inctue.customwebportal.controller.App"     
-    xmlns:mvc="sap.ui.core.mvc"     
-    xmlns="sap.m"     
-    xmlns:f="sap.f">
-    
-    <Page>
-        <customHeader>
-            <f:ShellBar
-                title="Web Portal"
-                homeIcon="./image/jng_logo.png"
-                showNotifications="false"
-                showProductSwitcher="false"
-                showSearch="true"
-                class="customShellBar">
-                
-                <!-- Search Bar in additional content -->
-                <!-- <f:additionalContent>
+<mvc:View
+    controllerName="com.inctue.customwebportal.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    displayBlock="true"
+>
+    <Shell>
+        <App id="idApp">
+            <Page
+                id="idMainPage"
+                showHeader="true"
+            >
+                <customHeader>
+                    <f:ShellBar
+                        title="Web Portal"
+                        homeIcon="./image/jng_logo.png"
+                        showNotifications="false"
+                        showProductSwitcher="false"
+                        showSearch="true"
+                        class="customShellBar"
+                        homeIconPressed=".onLogoPress"
+                    >
+                        <!-- Search Bar in additional content -->
+                        <!-- <f:additionalContent>
                     <SearchField 
                         id="globalSearchField"
                         placeholder="Search across the portal..."
@@ -24,22 +33,59 @@
                         class="customSearchField">
                     </SearchField>
                 </f:additionalContent> -->
-                
-                <!-- Avatar in additional content with proper sizing -->
-                <f:additionalContent>
-                    <f:Avatar 
-                        id="userAvatar"
-                        initials="JD"
-                        displaySize="XS"
-                        backgroundColor="Accent1"
-                        press="onAvatarPress"
-                        tooltip="User Profile"
-                        class="customAvatar">
-                    </f:Avatar>
-                </f:additionalContent>
-                
-            </f:ShellBar>
-        </customHeader>
-        
-    </Page>
+
+                        <!-- Avatar in additional content with proper sizing -->
+                        <f:additionalContent>
+                            <f:Avatar
+                                id="userAvatar"
+                                initials="JD"
+                                displaySize="XS"
+                                backgroundColor="Accent1"
+                                press="onAvatarPress"
+                                tooltip="User Profile"
+                                class="customAvatar"
+                            />
+                        </f:additionalContent>
+                    </f:ShellBar>
+                </customHeader>
+
+                <content>
+                    <VBox class="sapUiSmallMargin sapUiLargeMarginBeginEnd">
+                        <!-- Application Tiles Section -->
+                        <Title
+                            text="Applications"
+                            level="H3"
+                            class="sapUiSmallMarginBottom"
+                        />
+
+                        <!-- Dynamic Tiles -->
+                        <FlexBox
+                            wrap="Wrap"
+                            id="tileContainer"
+                            justifyContent="Start"
+                            alignItems="Center"
+                            items="{
+                                path: 'tilesModel>/tiles'
+                            }"
+                        >
+                            <GenericTile
+                                class="sapUiTinyMargin"
+                                header="{tilesModel>title}"
+                                subheader="{tilesModel>subtitle}"
+                                press=".onTilePress"
+                            >
+                                <TileContent>
+                                    <ImageContent src="{tilesModel>icon}" />
+                                </TileContent>
+                            </GenericTile>
+                        </FlexBox>
+                        <core:HTML
+                            id="appFrame"
+                            content=""
+                        />
+                    </VBox>
+                </content>
+            </Page>
+        </App>
+    </Shell>
 </mvc:View>

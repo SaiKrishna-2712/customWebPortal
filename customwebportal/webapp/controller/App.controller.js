@@ -1,14 +1,50 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
-    "sap/m/MessageToast"
-], function (Controller, Fragment, MessageToast) {
+    "sap/m/MessageToast",
+	"sap/ui/model/json/JSONModel"
+], function (Controller, Fragment, MessageToast, JSONModel) {
     "use strict";
 
     return Controller.extend("com.inctue.customwebportal.controller.App", {
         
         onInit: function () {
             // Initialize any required data here
+			var oData = {
+				tiles: [
+					{
+						ID: "1",
+						title: "Google",
+						subtitle: "Search Engine",
+						url: "https://www.google.com",
+						icon: "sap-icon://world",
+						embedMode: "newtab",
+						active: true
+					},
+					{
+						ID: "2",
+						title: "SAP",
+						subtitle: "SAP Official",
+						url: "https://www.sap.com",
+						icon: "sap-icon://hint",
+						embedMode: "iframe",
+						active: true
+					},
+					{
+						ID: "3",
+						title: "Employee Portal",
+						subtitle: "HR resources",
+						url: "https://topas.cherrywork.com/home/dashboard",
+						icon: "sap-icon://employee",
+						embedMode: "auto",
+						active: true
+					}
+				]
+			};
+
+			var oModel = new JSONModel(oData);
+			this.getView().setModel(oModel, "tilesModel");
+			console.log(oModel)
         },
 
         /**
@@ -35,6 +71,35 @@ sap.ui.define([
             });
         },
 
+		onTilePress: function (oEvent) {
+			var oContext = oEvent.getSource().getBindingContext("tilesModel");
+			var oData = oContext.getObject();
+
+			if (oData.embedMode === "newtab") {
+				// Open in new tab
+				window.open(oData.url, "_blank");
+			} else {
+				// Hide tile container & page title, show iframe
+				this.byId("tileContainer").setVisible(false);
+				this.byId("idMainPage").setTitle(""); // hide page title
+				const oFrame = this.byId("appFrame");
+
+				oFrame.setVisible(true);
+				oFrame.setContent(
+					`<iframe src="${oData.url}" 
+                     style="width:100%; height:100vh; border:none;">
+             </iframe>`
+				);
+			}
+		},
+
+		onLogoPress: function(oEvent) {
+			this.byId("tileContainer").setVisible(true);
+				// this.byId("idMainPage").setTitle(""); // hide page title
+				const oFrame = this.byId("appFrame");
+
+				oFrame.setVisible(false);
+		}
         
     });
 });
