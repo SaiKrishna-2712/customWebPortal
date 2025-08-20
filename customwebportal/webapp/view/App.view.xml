@@ -30,22 +30,19 @@
                                 search="onShellSearch"
                             />
                         </f:searchManager>
-
-                        <!-- Avatar in additional content with proper sizing -->
-                        <f:additionalContent>
+                        <f:profile>
                             <f:Avatar
                                 id="userAvatar"
                                 initials="JD"
                                 displaySize="XS"
                                 backgroundColor="Accent1"
-                                press="onAvatarPress"
                                 tooltip="User Profile"
                                 class="customAvatar"
+                                press="onAvatarPress"
                             />
-                        </f:additionalContent>
+                        </f:profile>
                     </f:ShellBar>
                 </customHeader>
-
                 <content>
                     <VBox class="sapUiSmallMargin sapUiLargeMarginBeginEnd">
                         <!-- Application Tiles Section -->
@@ -54,16 +51,13 @@
                             level="H3"
                             class="sapUiSmallMarginBottom"
                         />
-
                         <!-- Dynamic Tiles -->
                         <FlexBox
                             wrap="Wrap"
                             id="tileContainer"
                             justifyContent="Start"
                             alignItems="Center"
-                            items="{
-                                path: 'tilesModel>/tiles'
-                            }"
+                            items="{ path: 'tilesModel>/tiles' }"
                         >
                             <GenericTile
                                 class="sapUiTinyMargin"
@@ -76,11 +70,11 @@
                                 </TileContent>
                             </GenericTile>
                         </FlexBox>
-                        <core:HTML
-                            id="appFrame"
-                            content=""
-                        />
                     </VBox>
+                    <core:HTML
+                        id="appFrame"
+                        content=""
+                    />
                 </content>
             </Page>
         </App>
