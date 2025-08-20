@@ -19,20 +19,17 @@
                         homeIcon="./image/jng_logo.png"
                         showNotifications="false"
                         showProductSwitcher="false"
-                        showSearch="true"
                         class="customShellBar"
                         homeIconPressed=".onLogoPress"
                     >
-                        <!-- Search Bar in additional content -->
-                        <!-- <f:additionalContent>
-                    <SearchField 
-                        id="globalSearchField"
-                        placeholder="Search across the portal..."
-                        width="350px"
-                        showSearchButton="true"
-                        class="customSearchField">
-                    </SearchField>
-                </f:additionalContent> -->
+                        <f:searchManager>
+                            <f:SearchManager
+                                id="searchMgr"
+                                placeholder="Search…"
+                                maxLength="80"
+                                search="onShellSearch"
+                            />
+                        </f:searchManager>
 
                         <!-- Avatar in additional content with proper sizing -->
                         <f:additionalContent>
