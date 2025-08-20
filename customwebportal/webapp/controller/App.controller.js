@@ -1,15 +1,15 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "sap/ui/core/Fragment",
-    "sap/m/MessageToast",
+	"sap/ui/core/mvc/Controller",
+	"sap/ui/core/Fragment",
+	"sap/m/MessageToast",
 	"sap/ui/model/json/JSONModel"
 ], function (Controller, Fragment, MessageToast, JSONModel) {
-    "use strict";
+	"use strict";
 
-    return Controller.extend("com.inctue.customwebportal.controller.App", {
-        
-        onInit: function () {
-            // Initialize any required data here
+	return Controller.extend("com.inctue.customwebportal.controller.App", {
+
+		onInit: function () {
+			// Initialize any required data here
 			var oData = {
 				tiles: [
 					{
@@ -18,7 +18,7 @@ sap.ui.define([
 						subtitle: "Search Engine",
 						url: "https://www.google.com",
 						icon: "sap-icon://world",
-						embedMode: "newtab",
+						embedMode: "iframe",
 						active: true
 					},
 					{
@@ -45,31 +45,31 @@ sap.ui.define([
 			var oModel = new JSONModel(oData);
 			this.getView().setModel(oModel, "tilesModel");
 			console.log(oModel)
-        },
+		},
 
-        /**
-         * Event handler for avatar press - opens profile popover
-         */
-        onAvatarPress: function (oEvent) {
-            var oButton = oEvent.getSource(),
-                oView = this.getView();
+		/**
+		 * Event handler for avatar press - opens profile popover
+		 */
+		onAvatarPress: function (oEvent) {
+			var oButton = oEvent.getSource(),
+				oView = this.getView();
 
-            // Create popover if it doesn't exist
-            if (!this._pPopover) {
-                this._pPopover = Fragment.load({
-                    id: oView.getId(),
-                    name: "com.inctue.customwebportal.fragments.UserProfilePopover",
-                    controller: this
-                }).then(function (oPopover) {
-                    oView.addDependent(oPopover);
-                    return oPopover;
-                });
-            }
-            
-            this._pPopover.then(function (oPopover) {
-                oPopover.openBy(oButton);
-            });
-        },
+			// Create popover if it doesn't exist
+			if (!this._pPopover) {
+				this._pPopover = Fragment.load({
+					id: oView.getId(),
+					name: "com.inctue.customwebportal.fragments.UserProfilePopover",
+					controller: this
+				}).then(function (oPopover) {
+					oView.addDependent(oPopover);
+					return oPopover;
+				});
+			}
+
+			this._pPopover.then(function (oPopover) {
+				oPopover.openBy(oButton);
+			});
+		},
 
 		onTilePress: function (oEvent) {
 			var oContext = oEvent.getSource().getBindingContext("tilesModel");
@@ -79,7 +79,6 @@ sap.ui.define([
 				// Open in new tab
 				window.open(oData.url, "_blank");
 			} else {
-				// Hide tile container & page title, show iframe
 				this.byId("tileContainer").setVisible(false);
 				this.byId("idMainPage").setTitle(""); // hide page title
 				const oFrame = this.byId("appFrame");
@@ -93,13 +92,12 @@ sap.ui.define([
 			}
 		},
 
-		onLogoPress: function(oEvent) {
+		onLogoPress: function (oEvent) {
 			this.byId("tileContainer").setVisible(true);
-				// this.byId("idMainPage").setTitle(""); // hide page title
-				const oFrame = this.byId("appFrame");
-
-				oFrame.setVisible(false);
+			// this.byId("idMainPage").setTitle(""); // hide page title
+			const oFrame = this.byId("appFrame");
+			oFrame.setVisible(false);
 		}
-        
-    });
+
+	});
 });

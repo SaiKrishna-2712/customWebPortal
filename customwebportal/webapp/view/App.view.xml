@@ -44,7 +44,7 @@
                     </f:ShellBar>
                 </customHeader>
                 <content>
-                    <VBox class="sapUiSmallMargin sapUiLargeMarginBeginEnd">
+                    <VBox class="sapUiSmallMargin sapUiLargeMarginBeginEnd" id="tileContainer">
                         <!-- Application Tiles Section -->
                         <Title
                             text="Applications"
@@ -54,7 +54,6 @@
                         <!-- Dynamic Tiles -->
                         <FlexBox
                             wrap="Wrap"
-                            id="tileContainer"
                             justifyContent="Start"
                             alignItems="Center"
                             items="{ path: 'tilesModel>/tiles' }"
@@ -70,11 +69,11 @@
                                 </TileContent>
                             </GenericTile>
                         </FlexBox>
-                    </VBox>
-                    <core:HTML
-                        id="appFrame"
-                        content=""
-                    />
+                        </VBox>
+                        <core:HTML
+                            id="appFrame"
+                            content=""
+                        />
                 </content>
             </Page>
         </App>
