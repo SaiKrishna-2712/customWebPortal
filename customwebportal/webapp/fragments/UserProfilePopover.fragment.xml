@@ -1,0 +1,50 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    
+    <Popover
+        id="userProfilePopover"
+        title="John Doe"
+        placement="Bottom"
+        showHeader="true">
+        
+        <content>
+            <List>
+                <items>
+                    <StandardListItem 
+                        icon="sap-icon://activity-individual" 
+                        title="My Dashboard" 
+                        type="Active" 
+                        press="onProfileMenuPress" />
+                    <StandardListItem 
+                        icon="sap-icon://action-settings" 
+                        title="Account Settings" 
+                        type="Active" 
+                        press="onProfileMenuPress" />
+                    <StandardListItem 
+                        icon="sap-icon://bell" 
+                        title="Notifications" 
+                        type="Active" 
+                        press="onProfileMenuPress" />
+                    <StandardListItem 
+                        icon="sap-icon://private" 
+                        title="Privacy Settings" 
+                        type="Active" 
+                        press="onProfileMenuPress" />
+                    <StandardListItem 
+                        icon="sap-icon://sys-help" 
+                        title="Help and Support" 
+                        type="Active" 
+                        press="onProfileMenuPress" />
+                    <StandardListItem 
+                        icon="sap-icon://log" 
+                        title="Sign Out" 
+                        type="Active" 
+                        press="onSignOut" />
+                </items>
+            </List>
+        </content>
+        
+    </Popover>
+    
+</core:FragmentDefinition>
