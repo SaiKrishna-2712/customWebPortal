@@ -1,0 +1,19 @@
+.customSection {
+    border: 1px solid #dcdcdc;
+    /* border-radius: 8px; */
+    background-color: #ffffff;
+    padding: 1rem;
+}
+/* 🔔 Global Announcement Bar */
+.customAnnouncementBar {
+    background-color: #e74c3c; /* Red alert-style */
+    color: white;
+    font-weight: bold;
+}
+
+/* Footer */
+.customFooter {
+    background-color: #f4f4f4; /* Light gray */
+    border-top: 1px solid #ddd;
+    font-size: 0.875rem;
+}

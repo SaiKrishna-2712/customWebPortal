@@ -1,50 +1,25 @@
 <core:FragmentDefinition
     xmlns="sap.m"
-    xmlns:core="sap.ui.core">
-    
+    xmlns:core="sap.ui.core"
+>
     <Popover
         id="userProfilePopover"
-        title="John Doe"
+        title="User Profile"
         placement="Bottom"
-        showHeader="true">
-        
+        showHeader="true"
+    >
         <content>
-            <List>
-                <items>
-                    <StandardListItem 
-                        icon="sap-icon://activity-individual" 
-                        title="My Dashboard" 
-                        type="Active" 
-                        press="onProfileMenuPress" />
-                    <StandardListItem 
-                        icon="sap-icon://action-settings" 
-                        title="Account Settings" 
-                        type="Active" 
-                        press="onProfileMenuPress" />
-                    <StandardListItem 
-                        icon="sap-icon://bell" 
-                        title="Notifications" 
-                        type="Active" 
-                        press="onProfileMenuPress" />
-                    <StandardListItem 
-                        icon="sap-icon://private" 
-                        title="Privacy Settings" 
-                        type="Active" 
-                        press="onProfileMenuPress" />
-                    <StandardListItem 
-                        icon="sap-icon://sys-help" 
-                        title="Help and Support" 
-                        type="Active" 
-                        press="onProfileMenuPress" />
-                    <StandardListItem 
-                        icon="sap-icon://log" 
-                        title="Sign Out" 
-                        type="Active" 
-                        press="onSignOut" />
-                </items>
-            </List>
+            <VBox class="sapUiSmallMargin">
+                <ObjectIdentifier
+                    title="John Doe"
+                    text="john.doe@example.com"
+                />
+
+                <ObjectStatus
+                    text="Build Version: 1.0.3"
+                    state="Information"
+                />
+            </VBox>
         </content>
-        
     </Popover>
-    
 </core:FragmentDefinition>

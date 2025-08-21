@@ -3,74 +3,139 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
     xmlns:f="sap.f"
+    xmlns:l="sap.ui.layout"
     xmlns="sap.m"
-    xmlns:layout="sap.ui.layout"
     displayBlock="true"
 >
-    <Shell>
-        <App id="idApp">
+    <Shell id="idMainShell">
+        <App id="idMainApp">
             <Page
-                id="idMainPage"
-                showHeader="true"
+                id="idMainPg"
+                showHeader="false"
             >
-                <customHeader>
-                    <f:ShellBar
-                        title="Web Portal"
-                        homeIcon="./image/jng_logo.png"
-                        showNotifications="false"
-                        showProductSwitcher="false"
-                        class="customShellBar"
-                        homeIconPressed=".onLogoPress"
-                    >
-                        <f:searchManager>
-                            <f:SearchManager
-                                id="searchMgr"
-                                placeholder="Search…"
-                                maxLength="80"
-                                search="onShellSearch"
-                            />
-                        </f:searchManager>
-                        <f:profile>
-                            <f:Avatar
-                                id="userAvatar"
-                                initials="JD"
-                                displaySize="XS"
-                                backgroundColor="Accent1"
-                                tooltip="User Profile"
-                                class="customAvatar"
-                                press="onAvatarPress"
-                            />
-                        </f:profile>
-                    </f:ShellBar>
-                </customHeader>
                 <content>
-                    <VBox class="sapUiSmallMargin sapUiLargeMarginBeginEnd" id="tileContainer">
-                        <!-- Application Tiles Section -->
-                        <Title
-                            text="Applications"
-                            level="H3"
-                            class="sapUiSmallMarginBottom"
-                        />
-                        <!-- Dynamic Tiles -->
-                        <FlexBox
-                            wrap="Wrap"
-                            justifyContent="Start"
-                            alignItems="Center"
-                            items="{ path: 'tilesModel>/tiles' }"
+                    <VBox id="idMainContainerVBox" width="100%">
+                        <!-- 🔔 Global Announcement Bar -->
+                        <Toolbar
+                            id="idGlobalAnnouncementTlbr"
+                            height="2.5rem"
+                            class="customAnnouncementBar"
                         >
-                            <GenericTile
-                                class="sapUiTinyMargin"
-                                header="{tilesModel>title}"
-                                subheader="{tilesModel>subtitle}"
-                                press=".onTilePress"
+                            <ToolbarSpacer id="idGlobalAnnouncementLeftSpcr" />
+                            <Text
+                                id="idGlobalAnnouncementTxt"
+                                text="{i18n>globalAnnouncementText}"
+                                class="sapUiSmallMargin"
+                            />
+                            <ToolbarSpacer id="idGlobalAnnouncementRightSpcr" />
+                        </Toolbar>
+
+                        <!-- ShellBar -->
+                        <f:ShellBar
+                            id="idMainShellBar"
+                            title="{i18n>webPortalTitle}"
+                            homeIcon="./image/jng_logo.png"
+                            showNotifications="false"
+                            showProductSwitcher="false"
+                            class="customShellBar"
+                            homeIconPressed=".onLogoPress"
+                        >
+                            <f:searchManager>
+                                <f:SearchManager
+                                    id="idMainSearchMgr"
+                                    placeholder="{i18n>searchPlaceholder}"
+                                    maxLength="80"
+                                    search="onShellSearch"
+                                />
+                            </f:searchManager>
+
+                            <f:profile>
+                                <f:Avatar
+                                    id="idUserProfileAvtr"
+                                    initials="JD"
+                                    displaySize="XS"
+                                    backgroundColor="Accent1"
+                                    tooltip="{i18n>userProfileTooltip}"
+                                    class="customAvatar"
+                                    press="onAvatarPress"
+                                />
+                            </f:profile>
+                        </f:ShellBar>
+
+                        <!-- Main Layout using Grid (70% / 30%) -->
+                        <l:Grid
+                            id="idMainLayoutGrd"
+                            defaultSpan="L12 M12 S12"
+                            width="100%"
+                            hSpacing="1"
+                            vSpacing="1"
+                            class="sapUiMediumMarginTop sapUiLargeMarginBegin sapUiLargeMarginEnd"
+                        >
+                            <!-- Applications Section (70%) -->
+                            <Panel
+                                id="idApplicationsPnl"
+                                headerText="{i18n>applicationsTitle}"
+                                expandable="false"
+                                class="sapUiNoContentPadding sapUiSmallMarginEnd"
+                                width="100%"
                             >
-                                <TileContent>
-                                    <ImageContent src="{tilesModel>icon}" />
-                                </TileContent>
-                            </GenericTile>
-                        </FlexBox>
-                        </VBox>
-                        <VBox height="100%">
+                                <layoutData>
+                                    <l:GridData span="L9 M12 S12" />
+                                </layoutData>
+                                <FlexBox
+                                    id="idApplicationsTileContainerFlxBx"
+                                    wrap="Wrap"
+                                    justifyContent="Start"
+                                    alignItems="Center"
+                                    items="{ path: 'tilesModel>/tiles' }"
+                                >
+                                    <GenericTile
+                                        id="idApplicationTile"
+                                        class="sapUiTinyMargin"
+                                        header="{tilesModel>title}"
+                                        subheader="{tilesModel>subtitle}"
+                                        press=".onTilePress"
+                                    >
+                                        <TileContent id="idApplicationTileCnt">
+                                            <ImageContent
+                                                id="idApplicationTileImgCnt"
+                                                src="{tilesModel>icon}"
+                                            />
+                                        </TileContent>
+                                    </GenericTile>
+                                </FlexBox>
+                                <core:HTML
+                                    id="idApplicationFrameHtml"
+                                    content=""
+                                />
+                            </Panel>
+
+                            <!-- Announcements Section (30%) -->
+                            <Panel
+                                id="idAnnouncementsPnl"
+                                headerText="{i18n>announcementsTitle}"
+                                expandable="false"
+                                width="100%"
+                            >
+                                <layoutData>
+                                    <l:GridData span="L3 M12 S12" />
+                                </layoutData>
+                                <List
+                                    id="idAnnouncementsLst"
+                                    items="{ path: 'announcementsModel>/announcements' }"
+                                >
+                                    <StandardListItem
+                                        id="idAnnouncementItm"
+                                        title="{announcementsModel>title}"
+                                        description="{announcementsModel>date}"
+                                        type="Active"
+                                        press=".onAnnouncementPress"
+                                    />
+                                </List>
+                            </Panel>
+                        </l:Grid>
+                    </VBox>
+                    <VBox height="100%">
                         <core:HTML
                             id="appFrame"
                             content=""
@@ -80,6 +145,21 @@
                         </layoutData>
                         </VBox>
                 </content>
+
+                <!-- Footer -->
+                <footer>
+                    <OverflowToolbar 
+                        id="idFooterTlbr" 
+                        class="sapUiSmallMarginTop customFooter"
+                    >
+                        <ToolbarSpacer id="idFooterLeftSpcr" />
+                        <Text 
+                            id="idFooterCopyrightTxt" 
+                            text="{i18n>footerCopyrightText}" 
+                        />
+                        <ToolbarSpacer id="idFooterRightSpcr" />
+                    </OverflowToolbar>
+                </footer>
             </Page>
         </App>
     </Shell>
