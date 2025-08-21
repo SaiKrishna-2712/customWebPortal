@@ -4,13 +4,13 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/ui/model/json/JSONModel"
 ], function (Controller, Fragment, MessageToast, JSONModel) {
-	"use strict";
+    "use strict";
 
     return Controller.extend("com.inctue.customwebportal.controller.App", {
 
         onInit: function () {
             // 🔹 Tiles data
-            var oData = {
+            var oTilesData = {
                 tiles: [
                     {
                         ID: "1",
@@ -36,49 +36,42 @@ sap.ui.define([
                         subtitle: "HR resources",
                         url: "https://topas.cherrywork.com/home/dashboard",
                         icon: "sap-icon://employee",
-                        embedMode: "newtab",
+                        embedMode: "iframe",
                         active: true
                     }
                 ]
             };
-            var oModel = new JSONModel(oData);
-            this.getView().setModel(oModel, "tilesModel");
+            var oTilesModel = new JSONModel(oTilesData);
+            this.getView().setModel(oTilesModel, "tilesModel");
 
-            var oAnnouncements = {
-                announcements: [
-                    {
-                        title: "Test Important Announcement",
-                        date: "5 days ago",
-                        category: "Reporting",
-                        description: "This is a test important announcement for reporting users."
-                    },
-                    {
-                        title: "System Maintenance Scheduled",
-                        date: "July 23",
-                        category: "General",
-                        description: "System will be down for maintenance from 12 AM to 3 AM."
-                    },
-                    {
-                        title: "New Feature Released",
-                        date: "July 20",
-                        category: "Planning / Forecasting",
-                        description: "We have rolled out a new planning dashboard with enhanced filters."
-                    }
-                ]
-            };
-            var oAnnouncementsModel = new JSONModel(oAnnouncements);
+            // 🔹 Announcements data
+            var oAnnouncementsModel = new JSONModel();
+            oAnnouncementsModel.loadData(
+                sap.ui.require.toUrl("com/inctue/customwebportal/model/announcements.json")
+            );
             this.getView().setModel(oAnnouncementsModel, "announcementsModel");
 
-            console.log("Tiles Model:", oModel);
+            oAnnouncementsModel.attachRequestCompleted(() => {
+                const announcements = oAnnouncementsModel.getProperty("/announcements") || [];
+                announcements.forEach(a => {
+                    a.read = false;
+                    a.expanded = false;
+                    a.previousExpanded = false;
+                });
+                oAnnouncementsModel.setProperty("/announcements", announcements);
+                this._updateAnnouncementStyles();
+            });
+
+            console.log("Tiles Model:", oTilesModel);
             console.log("Announcements Model:", oAnnouncementsModel);
         },
 
-		/**
-		 * Event handler for avatar press - opens profile popover
-		 */
-		onAvatarPress: function (oEvent) {
-			var oButton = oEvent.getSource(),
-				oView = this.getView();
+        /**
+         * Event handler for avatar press - opens profile popover
+         */
+        onAvatarPress: function (oEvent) {
+            var oButton = oEvent.getSource(),
+                oView = this.getView();
 
             if (!this._pPopover) {
                 this._pPopover = Fragment.load({
@@ -92,12 +85,9 @@ sap.ui.define([
             }
 
             this._pPopover.then(function (oPopover) {
-                // Check if popover is already open
                 if (oPopover.isOpen()) {
-                    // Close the popover if it's already open
                     oPopover.close();
                 } else {
-                    // Open the popover if it's closed
                     oPopover.openBy(oButton);
                 }
             });
@@ -107,30 +97,90 @@ sap.ui.define([
             var oContext = oEvent.getSource().getBindingContext("tilesModel");
             var oData = oContext.getObject();
 
-			if (oData.embedMode === "newtab") {
-				// Open in new tab
-				window.open(oData.url, "_blank");
-			} else {
-				this.byId("tileContainer").setVisible(false);
-				// this.byId("idMainPage").setTitle(""); // hide page title
-				const oFrame = this.byId("appFrame");
+            if (oData.embedMode === "newtab") {
+                window.open(oData.url, "_blank");
+            } else {
+                this.byId("idApplicationsTileContainerFlxBx").setVisible(false);
 
-				oFrame.setVisible(true);
-				oFrame.setContent(
-					`<iframe src="${oData.url}" 
-                     style="width:100%; height:90vh; border:none">
-            		</iframe>`
-				);
-			}
-		},
+                const oFrame = this.byId("idApplicationFrameHtml");
+                oFrame.setVisible(true);
+                oFrame.setContent(
+                    `<iframe src="${oData.url}" 
+                        style="width:100%; height:90vh; border:none">
+                    </iframe>`
+                );
+            }
+        },
 
-		onLogoPress: function (oEvent) {
-			this.byId("tileContainer").setVisible(true);
-			// this.byId("idMainPage").setTitle(""); // hide page title
-			const oFrame = this.byId("appFrame");
-			oFrame.setContent("<html><body></body></html>"); // clears inner content
-			oFrame.setVisible(false);
-		}
+        onLogoPress: function () {
+            this.byId("idApplicationsTileContainerFlxBx").setVisible(true);
 
-	});
+            const oFrame = this.byId("idApplicationFrameHtml");
+            oFrame.setContent("<html><body></body></html>");
+            oFrame.setVisible(false);
+        },
+
+        onAnnouncementPress: function (oEvent) {
+            const oItem = oEvent.getSource();
+            const oCtx = oItem.getBindingContext("announcementsModel");
+            const sPath = oCtx.getPath();
+            const oModel = oCtx.getModel();
+
+            const announcements = oModel.getProperty("/announcements");
+            const clicked = oModel.getProperty(sPath);
+
+            clicked.expanded = !clicked.expanded;
+            if (clicked.expanded) {
+                clicked.read = true;
+                clicked.previousExpanded = false;
+            } else {
+                clicked.previousExpanded = true;
+            }
+
+            oModel.setProperty("/announcements", announcements);
+            this._updateAnnouncementStyles();
+        },
+
+        _updateAnnouncementStyles: function () {
+            const oList = this.byId("idAnnouncementsLst");
+            if (!oList) return;
+
+            const oModel = this.getView().getModel("announcementsModel");
+            const aItems = oList.getItems();
+
+            aItems.forEach(oItem => {
+                const oCtx = oItem.getBindingContext("announcementsModel");
+                if (!oCtx) return;
+
+                const data = oModel.getProperty(oCtx.getPath());
+                if (!data) return;
+
+                const oMainHBox = oItem.getContent()[0];
+                const oContainerBox = oMainHBox.getItems()[1]; // content VBox
+                const oLineVBox = oMainHBox.getItems()[0].getItems()[0]; // vertical line
+
+                oLineVBox.removeStyleClass("lineBlue");
+                oLineVBox.removeStyleClass("lineLightGray");
+                oLineVBox.addStyleClass(data.read ? "lineLightGray" : "lineBlue");
+
+                const applyStyle = ctrl => {
+                    if (!ctrl) return;
+                    ctrl.removeStyleClass("announcementTextUnread");
+                    ctrl.removeStyleClass("announcementTextRead");
+                    ctrl.addStyleClass(data.read ? "announcementTextRead" : "announcementTextUnread");
+
+                    if (ctrl.getItems && typeof ctrl.getItems === "function") {
+                        ctrl.getItems().forEach(applyStyle);
+                    }
+                };
+                if (oContainerBox && oContainerBox.getItems) {
+                    oContainerBox.getItems().forEach(applyStyle);
+                }
+            });
+        },
+
+        onViewAllPress: function () {
+            sap.m.MessageToast.show("View All Announcements Pressed");
+        }
+    });
 });
