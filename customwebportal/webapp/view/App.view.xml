@@ -70,10 +70,15 @@
                             </GenericTile>
                         </FlexBox>
                         </VBox>
+                        <VBox height="100%">
                         <core:HTML
                             id="appFrame"
                             content=""
                         />
+                        <layoutData>
+                        <FlexItemData growFactor="1"></FlexItemData>
+                        </layoutData>
+                        </VBox>
                 </content>
             </Page>
         </App>

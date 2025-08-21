@@ -18,14 +18,14 @@ sap.ui.define([
 						subtitle: "Search Engine",
 						url: "https://www.google.com",
 						icon: "sap-icon://world",
-						embedMode: "iframe",
+						embedMode: "newtab",
 						active: true
 					},
 					{
 						ID: "2",
 						title: "SAP",
 						subtitle: "SAP Official",
-						url: "https://www.sap.com",
+						url: "https://people.zoho.com/",
 						icon: "sap-icon://hint",
 						embedMode: "iframe",
 						active: true
@@ -36,7 +36,7 @@ sap.ui.define([
 						subtitle: "HR resources",
 						url: "https://topas.cherrywork.com/home/dashboard",
 						icon: "sap-icon://employee",
-						embedMode: "newtab",
+						embedMode: "iframe",
 						active: true
 					}
 				]
@@ -80,14 +80,14 @@ sap.ui.define([
 				window.open(oData.url, "_blank");
 			} else {
 				this.byId("tileContainer").setVisible(false);
-				this.byId("idMainPage").setTitle(""); // hide page title
+				// this.byId("idMainPage").setTitle(""); // hide page title
 				const oFrame = this.byId("appFrame");
 
 				oFrame.setVisible(true);
 				oFrame.setContent(
 					`<iframe src="${oData.url}" 
-                     style="width:100%; height:100vh; border:none;">
-             </iframe>`
+                     style="width:100%; height:90vh; border:none">
+            		</iframe>`
 				);
 			}
 		},
@@ -96,6 +96,7 @@ sap.ui.define([
 			this.byId("tileContainer").setVisible(true);
 			// this.byId("idMainPage").setTitle(""); // hide page title
 			const oFrame = this.byId("appFrame");
+			oFrame.setContent("<html><body></body></html>"); // clears inner content
 			oFrame.setVisible(false);
 		}
 
