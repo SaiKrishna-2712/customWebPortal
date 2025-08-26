@@ -32,9 +32,27 @@ sap.ui.define([
                     },
                     {
                         ID: "3",
-                        title: "Employee Portal",
-                        subtitle: "HR resources",
+                        title: "Topas Cherrywork",
+                        subtitle: "Timesheet",
                         url: "https://topas.cherrywork.com/home/dashboard",
+                        icon: "sap-icon://employee",
+                        embedMode: "iframe",
+                        active: true
+                    },
+                    {
+                        ID: "4",
+                        title: "Example webpage",
+                        subtitle: "example",
+                        url: "https://www.wikipedia.org",
+                        icon: "sap-icon://employee",
+                        embedMode: "iframe",
+                        active: true
+                    },
+                    {
+                        ID: "5",
+                        title: "Zoho People",
+                        subtitle: "HR resources",
+                        url: "https://www.zoho.com/people/",
                         icon: "sap-icon://employee",
                         embedMode: "iframe",
                         active: true
