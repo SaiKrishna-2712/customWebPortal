@@ -89,6 +89,7 @@
 
                                     <!-- Applications Section -->
                                     <VBox
+                                        id="idApplicationsTileContainerVBx"
                                         class="sapUiMediumMarginBottom sapUiContentPadding"
                                         backgroundDesign="Solid"
                                     >
@@ -117,16 +118,15 @@
                                                 </TileContent>
                                             </GenericTile>
                                         </FlexBox>
+                                        
                                         <!-- HTML Frames -->
-                                        <core:HTML
-                                            id="idApplicationFrameHtml"
-                                            content=""
-                                        />
+                                        
                                         <!-- <core:HTML
                                             id="appFrame"
                                             content=""
                                         /> -->
                                     </VBox>
+                                    <VBox id="idIFrameContainerVBx"></VBox>
 
                                     <!-- Quick Links Section -->
                                     <VBox

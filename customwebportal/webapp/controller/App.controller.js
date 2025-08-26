@@ -18,7 +18,7 @@ sap.ui.define([
                         subtitle: "Search Engine",
                         url: "https://www.google.com",
                         icon: "sap-icon://world",
-                        embedMode: "newtab",
+                        embedMode: "iframe",
                         active: true
                     },
                     {
@@ -96,28 +96,50 @@ sap.ui.define([
         onTilePress: function (oEvent) {
             var oContext = oEvent.getSource().getBindingContext("tilesModel");
             var oData = oContext.getObject();
+            var that = this;
 
             if (oData.embedMode === "newtab") {
                 window.open(oData.url, "_blank");
             } else {
                 this.byId("idApplicationsTileContainerFlxBx").setVisible(false);
 
-                const oFrame = this.byId("idApplicationFrameHtml");
-                oFrame.setVisible(true);
-                oFrame.setContent(
-                    `<iframe src="${oData.url}" 
-                        style="width:100%; height:90vh; border:none">
-                    </iframe>`
-                );
+                var oVBox = this.byId("idIFrameContainerVBx");
+                oVBox.removeAllItems();
+                oVBox.setVisible(true);
+
+                var oIframe = new sap.ui.core.HTML({
+                    content: "<iframe id='idEmbeddediFrame' src='" + oData.url + "' style='width:100%;height:90vh;border:none;'></iframe>"
+                });
+
+                oVBox.addItem(oIframe);
+
+                setTimeout(function () {
+                    try {
+                        // Try accessing iframe document (will fail if blocked)
+                        var iframeEl = document.getElementById("idEmbeddediFrame");
+                        var test = iframeEl.contentWindow.location.href;
+
+                        // If access allowed → fine
+                        console.log("Iframe loaded:", test);
+                    } catch (err) {
+                        console.warn("Iframe blocked, falling back to new tab", err);
+                        window.open(oData.url, "_blank");
+                        // Optionally remove iframe if blocked
+                        that.onLogoPress();
+                        oVBox.removeAllItems();
+                    }
+                }, 1000);
+
+
             }
         },
 
         onLogoPress: function () {
             this.byId("idApplicationsTileContainerFlxBx").setVisible(true);
 
-            const oFrame = this.byId("idApplicationFrameHtml");
-            oFrame.setContent("<html><body></body></html>");
-            oFrame.setVisible(false);
+            const oVBox = this.byId("idIFrameContainerVBx");
+            oVBox.removeAllItems();
+            oVBox.setVisible(false);
         },
 
         onAnnouncementPress: function (oEvent) {
