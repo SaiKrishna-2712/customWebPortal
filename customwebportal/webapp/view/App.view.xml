@@ -93,11 +93,21 @@
                                         class="sapUiMediumMarginBottom sapUiContentPadding"
                                         backgroundDesign="Solid"
                                     >
-                                        <Title
-                                            text="{i18n>applicationsTitle}"
-                                            level="H3"
-                                            class="sapUiSmallMarginBottom"
-                                        />
+                                        <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
+                                            <Title
+                                                text="{i18n>applicationsTitle}"
+                                                level="H3"
+                                            />
+                                            <!-- Back button for iframe view -->
+                                            <Button 
+                                                id="idBackToTilesBtn"
+                                                text="← Back to Applications"
+                                                type="Transparent"
+                                                press=".onLogoPress"
+                                                visible="false"
+                                                class="sapUiTinyMargin"/>
+                                        </HBox>
+                                        
                                         <FlexBox
                                             id="idApplicationsTileContainerFlxBx"
                                             wrap="Wrap"
@@ -118,15 +128,16 @@
                                                 </TileContent>
                                             </GenericTile>
                                         </FlexBox>
-                                        
-                                        <!-- HTML Frames -->
-                                        
-                                        <!-- <core:HTML
-                                            id="appFrame"
-                                            content=""
-                                        /> -->
                                     </VBox>
-                                    <VBox id="idIFrameContainerVBx"></VBox>
+                                    
+                                    <!-- IFrame Container for embedded applications -->
+                                    <VBox 
+                                        id="idIFrameContainerVBx" 
+                                        visible="false"
+                                        class="sapUiMediumMarginBottom sapUiContentPadding"
+                                        backgroundDesign="Solid">
+                                        <!-- Iframe content will be added dynamically -->
+                                    </VBox>
 
                                     <!-- Quick Links Section -->
                                     <VBox
@@ -319,7 +330,7 @@
                                             class="sapUiSmallMarginBottom"
                                         />
                                         <Text
-                                            text="Access training materials, courses, videos, and guides to help you navigate the tools &amp; systems in Vital, as well as enhance your skills in other areas."
+                                            text="All Reporting walkthroughs, guides and answers in one convenient location!"
                                             class="sapUiSmallMarginBottom"
                                         />
                                         <Button
