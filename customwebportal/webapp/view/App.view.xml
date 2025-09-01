@@ -61,7 +61,6 @@
                                     displaySize="XS"
                                     backgroundColor="Accent1"
                                     tooltip="{i18n>userProfileTooltip}"
-                                    class="customAvatar"
                                     press="onAvatarPress"
                                 />
                                 <!-- <Avatar
