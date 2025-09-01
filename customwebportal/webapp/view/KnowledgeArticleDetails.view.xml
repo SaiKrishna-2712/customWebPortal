@@ -1,0 +1,11 @@
+<mvc:View
+    controllerName="com.inctue.customwebportal.controller.KnowledgeArticleDetails"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+>
+    <Page title="All Knowledge Articles">
+        <content>
+            <Text text="All Knowledge Articles Details Page" />
+        </content>
+    </Page>
+</mvc:View>

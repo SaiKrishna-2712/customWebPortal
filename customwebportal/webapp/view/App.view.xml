@@ -7,21 +7,21 @@
     xmlns="sap.m"
     displayBlock="true"
 >
-    <Shell id="idMainShell">
+    <Shell id="idMainShell" appWidthLimited="false">
         <App id="idMainApp">
             <Page
                 id="idMainPg"
                 showHeader="false"
+                class="customGreyBackground"
             >
                 <content>
-                    <!-- Main container fills height -->
+                    <!-- Main container-->
                     <VBox
                         id="idMainContainerVBox"
                         width="100%"
-                        fitContainer="true"
                         class="customGreyBackground"
                     >
-                        <!-- 🔔 Global Announcement Bar -->
+                        <!-- Global Announcement Bar -->
                         <Toolbar
                             id="idGlobalAnnouncementTlbr"
                             height="2.5rem"
@@ -64,13 +64,71 @@
                                     class="customAvatar"
                                     press="onAvatarPress"
                                 />
+                                <!-- <Avatar
+                                    id="idUserProfileAvtr"
+                                    initials="JD"
+                                    displaySize="XS"
+                                    tooltip="{i18n>userProfileTooltip}"
+                                    press="onAvatarPress"
+                                /> -->
                             </f:profile>
                         </f:ShellBar>
 
-                        <!-- Main Content Area expands (pushes footer down) -->
-                        <VBox class="sapUiContentPadding">
+                        <!-- Banner Section -->
+                        <l:Grid
+                            id="idBannerGrid"
+                            defaultSpan="L12 M12 S12"
+                            width="98%"
+                        >
+                            <VBox
+                                width="100%"
+                                class="sapUiContentPadding bannerContainer"
+                            >
+                                <layoutData>
+                                    <l:GridData span="L12 M12 S12" />
+                                </layoutData>
+                                <FlexBox
+                                    height="10rem"
+                                    alignItems="Center"
+                                    justifyContent="Start"
+                                    class="bannerFlexBox"
+                                    wrap="Wrap"
+                                    direction="Row"
+                                >
+                                    <VBox
+                                        class="sapUiSmallMargin"
+                                        alignItems="Start"
+                                    >
+                                        <!-- Date & Temperature -->
+                                        <Text
+                                            id="idDateTempTxt"
+                                            text="{bannerModel>/dateTemp}"
+                                            class="sapUiSmallMarginBottom bannerDateTemp"
+                                            wrapping="true"
+                                        />
+                                        <!-- Greeting -->
+                                        <Title
+                                            id="idGreetingTxt"
+                                            text="Hello, {bannerModel>/userName}"
+                                            level="H2"
+                                            class="sapUiSmallMarginBottom bannerGreeting"
+                                            wrapping="true"
+                                        />
+                                    </VBox>
+                                </FlexBox>
+                            </VBox>
+                        </l:Grid>
+
+                        <!--  Main Content Area -->
+                        <VBox
+                            class="sapUiContentPadding"
+                            height="100%"
+                        >
                             <layoutData>
-                                <FlexItemData growFactor="1" />
+                                <FlexItemData
+                                    growFactor="1"
+                                    shrinkFactor="1"
+                                />
                             </layoutData>
 
                             <l:Grid
@@ -79,12 +137,11 @@
                                 width="100%"
                                 hSpacing="1"
                                 vSpacing="1"
-                                class="sapUiMediumMarginTop"
                             >
-                                <!-- Left Section (70%) -->
+                                <!-- Left Section  -->
                                 <VBox width="100%">
                                     <layoutData>
-                                        <l:GridData span="L8 M12 S12" />
+                                        <l:GridData span="L9 M12 S12" />
                                     </layoutData>
 
                                     <!-- Applications Section -->
@@ -93,53 +150,35 @@
                                         class="sapUiMediumMarginBottom sapUiContentPadding"
                                         backgroundDesign="Solid"
                                     >
-                                        <HBox justifyContent="SpaceBetween" alignItems="Center" class="sapUiSmallMarginBottom">
-                                            <Title
-                                                text="{i18n>applicationsTitle}"
-                                                level="H3"
-                                            />
-                                            <!-- Back button for iframe view -->
-                                            <Button 
-                                                id="idBackToTilesBtn"
-                                                text="← Back to Applications"
-                                                type="Transparent"
-                                                press=".onLogoPress"
-                                                visible="false"
-                                                class="sapUiTinyMargin"/>
-                                        </HBox>
-                                        
-                                        <FlexBox
-                                            id="idApplicationsTileContainerFlxBx"
-                                            wrap="Wrap"
-                                            justifyContent="Start"
-                                            alignItems="Center"
-                                            items="{ path: 'tilesModel>/tiles' }"
+                                        <Title
+                                            text="{i18n>applicationsTitle}"
+                                            level="H3"
+                                            class="sapUiSmallMarginBottom customSectionTitle"
+                                        />
+                                        <ScrollContainer
+                                            id="idApplicationsScrollContainer"
+                                            width="100%"
+                                            vertical="true"
+                                            horizontal="false"
+                                            focusable="false"
                                         >
-                                            <GenericTile
-                                                class="sapUiTinyMargin"
-                                                header="{tilesModel>title}"
-                                                subheader="{tilesModel>subtitle}"
-                                                press=".onTilePress"
-                                            >
-                                                <TileContent>
-                                                    <ImageContent
-                                                        src="{tilesModel>icon}"
-                                                    />
-                                                </TileContent>
-                                            </GenericTile>
-                                        </FlexBox>
-                                    </VBox>
-                                    
-                                    <!-- IFrame Container for embedded applications -->
-                                    <VBox 
-                                        id="idIFrameContainerVBx" 
-                                        visible="false"
-                                        class="sapUiMediumMarginBottom sapUiContentPadding"
-                                        backgroundDesign="Solid">
-                                        <!-- Iframe content will be added dynamically -->
+                                            <l:Grid
+                                                id="idApplicationsTileGrid"
+                                                defaultSpan="L3 M6 S12"
+                                                width="100%"
+                                                hSpacing="1"
+                                                vSpacing="1"
+                                                class="sapUiResponsiveContentPadding"
+                                            />
+                                        </ScrollContainer>
+
+                                        <core:HTML
+                                            id="idApplicationFrameHtml"
+                                            content=""
+                                        />
                                     </VBox>
 
-                                    <!-- Quick Links Section -->
+                                    <!-- Quick Links section -->
                                     <VBox
                                         class="sapUiMediumMarginBottom sapUiContentPadding"
                                         backgroundDesign="Solid"
@@ -147,29 +186,32 @@
                                         <Title
                                             text="Quick Links"
                                             level="H3"
-                                            class="sapUiSmallMarginBottom"
+                                            class="sapUiSmallMarginBottom customSectionTitle"
                                         />
+
                                         <l:Grid
                                             defaultSpan="L6 M6 S12"
                                             hSpacing="1"
                                             vSpacing="1"
+                                            content="{quickLinksModel>/links}"
                                         >
                                             <Link
-                                                text="A page with Schedule"
-                                                press="onSchedulePress"
-                                            />
-                                            <Link
-                                                text="Access Pharm &amp; Vision Planning Calendars"
-                                                press="onCalendarPress"
-                                            />
-                                            <Link
-                                                text="Find a DTP for gCraft, iRIS, or SCA"
-                                                press="onDTPPress"
-                                            />
-                                            <Link
-                                                text="Overview: Fast Facts About Vital"
-                                                press="onOverviewPress"
-                                            />
+                                                text="{quickLinksModel>text}"
+                                                visible="{quickLinksModel>active}"
+                                                press="onQuickLinkPress"
+                                            >
+                                                <customData>
+                                                    <core:CustomData
+                                                        key="action"
+                                                        value="{quickLinksModel>action}"
+                                                    />
+                                                </customData>
+                                                <layoutData>
+                                                    <l:GridData
+                                                        span="L6 M6 S12"
+                                                    />
+                                                </layoutData>
+                                            </Link>
                                         </l:Grid>
                                     </VBox>
 
@@ -178,30 +220,102 @@
                                         class="sapUiMediumMarginBottom sapUiContentPadding"
                                         backgroundDesign="Solid"
                                     >
-                                        <HBox
+                                        <!-- Header -->
+                                        <FlexBox
+                                            alignItems="End"
                                             justifyContent="SpaceBetween"
-                                            alignItems="Center"
-                                            class="sapUiSmallMarginBottom"
+                                            wrap="Wrap"
+                                            direction="Row"
                                         >
                                             <Title
                                                 text="Featured Knowledge Articles"
-                                                level="H3"
+                                                class="customSectionTitle"
                                             />
                                             <Link
+                                                target="_blank"
                                                 text="View All"
-                                                press="onViewAllArticles"
+                                                href="https://jnjfinance.service-now.com/fsp?id=kb_view2&amp;utm_source=VITAL&amp;utm_medium=navigation&amp;utm_campaign=homepage"
+                                                class="sapUiSmallMarginTop"
                                             />
-                                        </HBox>
-                                        <Text
-                                            text="There are no featured articles currently, however you can view all articles that are available."
-                                        />
+                                        </FlexBox>
+
+                                        <!-- Articles Grid for Responsive Layout -->
+                                        <l:Grid
+                                            defaultSpan="L12 M12 S12"
+                                            hSpacing="0"
+                                            vSpacing="0.5"
+                                        >
+                                            <VBox
+                                                items="{articlesModel>/values}"
+                                                width="100%"
+                                            >
+                                                <layoutData>
+                                                    <l:GridData
+                                                        span="L12 M12 S12"
+                                                    />
+                                                </layoutData>
+
+                                                <!-- Responsive Article Item -->
+                                                <FlexBox
+                                                    alignItems="Start"
+                                                    justifyContent="Start"
+                                                    class="sapUiTinyMarginTop"
+                                                    wrap="Wrap"
+                                                    direction="Row"
+                                                >
+                                                    <!-- Article title - Responsive width -->
+                                                    <VBox
+                                                        class="sapUiSmallMarginEnd rightBorder"
+                                                        width="auto"
+                                                    >
+                                                        <layoutData>
+                                                            <FlexItemData
+                                                                growFactor="1"
+                                                                shrinkFactor="1"
+                                                                minWidth="200px"
+                                                            />
+                                                        </layoutData>
+                                                        <HBox>
+                                                            <Label
+                                                                text="{articlesModel>number}"
+                                                                class="sapUiTinyMarginEnd"
+                                                            />
+                                                            <Link
+                                                                class="lnkTxtCls"
+                                                                target="_blank"
+                                                                text="{articlesModel>articleName}"
+                                                                href="{articlesModel>url}"
+                                                                wrapping="true"
+                                                            />
+                                                        </HBox>
+                                                    </VBox>
+
+                                                    <!-- Views - Fixed width but responsive positioning -->
+                                                    <HBox
+                                                        alignItems="Center"
+                                                        class="sapUiSmallMarginStart"
+                                                    >
+                                                        <layoutData>
+                                                            <FlexItemData
+                                                                shrinkFactor="0"
+                                                                minWidth="100px"
+                                                            />
+                                                        </layoutData>
+                                                        <Label
+                                                            text="{= ${articlesModel>views} + ' Views'}"
+                                                            class="vwTxtCls"
+                                                        />
+                                                    </HBox>
+                                                </FlexBox>
+                                            </VBox>
+                                        </l:Grid>
                                     </VBox>
                                 </VBox>
 
                                 <!-- Right Section (30%) -->
                                 <VBox width="100%">
                                     <layoutData>
-                                        <l:GridData span="L4 M12 S12" />
+                                        <l:GridData span="L3 M12 S12" />
                                     </layoutData>
 
                                     <!-- Announcements Section -->
@@ -216,16 +330,13 @@
                                             <Title
                                                 text="{i18n>announcementsTitle}"
                                                 level="H3"
-                                                class="sapUiSmallMarginBottom"
+                                                class="customSectionTitle"
                                             />
-                                            <Button
+                                            <Link
                                                 text="View All"
-                                                type="Default"
                                                 press=".onViewAllPress"
                                             />
                                         </HBox>
-
-                                        <!-- scrollcontainer area -->
                                         <ScrollContainer
                                             height="18rem"
                                             width="100%"
@@ -248,9 +359,8 @@
                                                         class="sapUiSmallMargin sapUiSmallMarginBottom"
                                                         alignItems="Stretch"
                                                     >
-                                                        <!-- Vertical line container -->
+                                                        <!-- Vertical line -->
                                                         <VBox
-                                                            class="lineContainer"
                                                             width="auto"
                                                             height="100%"
                                                         >
@@ -306,17 +416,19 @@
                                         <Title
                                             text="Find Answers to all your Reporting Questions!"
                                             level="H3"
-                                            class="sapUiSmallMarginBottom"
+                                            class="sapUiSmallMarginBottom customSectionTitle"
+                                            wrapping="true"
                                         />
                                         <Text
                                             text="All Reporting walkthroughs, guides and answers in one convenient location!"
                                             class="sapUiSmallMarginBottom"
                                         />
-                                        <Button
-                                            text="SignFi Reporting Catalog &amp; Toolkit"
-                                            press="onCatalogPress"
-                                            type="Emphasized"
-                                        />
+                                        <HBox justifyContent="End">
+                                            <Button
+                                                text="SignFi Reporting Catalog &amp; Toolkit"
+                                                press="onCatalogPress"
+                                            />
+                                        </HBox>
                                     </VBox>
 
                                     <!-- Training Section -->
@@ -327,53 +439,188 @@
                                         <Title
                                             text="Looking for Training?"
                                             level="H3"
-                                            class="sapUiSmallMarginBottom"
+                                            class="sapUiSmallMarginBottom customSectionTitle"
                                         />
                                         <Text
-                                            text="All Reporting walkthroughs, guides and answers in one convenient location!"
+                                            text="Access training materials, courses, videos, guides to help you navigate the tools &amp; systems in Vital, as well as enhance your skills in other areas."
                                             class="sapUiSmallMarginBottom"
                                         />
-                                        <Button
-                                            text="Visit Training"
-                                            press="onTrainingPress"
-                                        />
+                                        <HBox justifyContent="End">
+                                            <Button
+                                                text="Visit Training"
+                                                press="onTrainingPress"
+                                            />
+                                        </HBox>
                                     </VBox>
+                                    <!-- FAQ Section -->
+                                    <Panel
+                                        headerText="Frequently Asked Questions"
+                                        expandable="false"
+                                        expanded="true"
+                                        width="100%"
+                                    >
+                                        <VBox id="faqList" />
+                                    </Panel>
                                 </VBox>
                             </l:Grid>
                         </VBox>
+                    </VBox>
 
-                        <!-- Footer -->
-                        <Bar
-                            design="Auto"
-                            class="sapUiNoContentPadding sapUiSmallMarginTop"
+                    <!-- Footer -->
+                    <VBox
+                        class="sapUiContentPadding"
+                        backgroundDesign="Transparent"
+                    >
+                        <Toolbar
+                            class="sapUiResponsiveContentPadding customGreyBackground"
                         >
-                            <contentLeft>
-                                <Text text="Johnson&amp;Johnson" />
-                            </contentLeft>
-                            <contentRight>
-                                <HBox>
+                            <content>
+                                <!-- Left side content - Company name and links -->
+                                <HBox
+                                    alignItems="Center"
+                                    wrap="Wrap"
+                                    class="sapUiResponsiveMargin"
+                                >
+                                    <Text
+                                        text="Johnson&amp;Johnson"
+                                        class="customFooterBrand sapUiTinyMarginEnd"
+                                    />
                                     <Link
                                         text="Privacy Policy"
                                         press="onPrivacyPress"
+                                        class="customFooterLink sapUiTinyMarginEnd"
                                     />
-                                    <Text text=" | " />
+                                    <Text
+                                        text="|"
+                                        class="customFooterText sapUiTinyMarginEnd"
+                                    />
                                     <Link
                                         text="Terms of Use"
                                         press="onTermsPress"
+                                        class="customFooterLink sapUiTinyMarginEnd"
                                     />
-                                    <Text text=" | " />
+                                    <Text
+                                        text="|"
+                                        class="customFooterText sapUiTinyMarginEnd"
+                                    />
                                     <Link
                                         text="Release Notes"
                                         press="onReleasePress"
-                                    />
-                                    <Text
-                                        text=" | © 2025 Johnson and Johnson Services, Inc."
+                                        class="customFooterLink"
                                     />
                                 </HBox>
-                            </contentRight>
-                        </Bar>
+
+                                <ToolbarSpacer />
+
+                                <Text
+                                    text="© 2025 Johnson and Johnson Services, Inc."
+                                    class="customFooterText sapUiResponsiveMargin"
+                                    textAlign="End"
+                                />
+                            </content>
+                        </Toolbar>
                     </VBox>
+                    <!-- Footer -->
+                    <!-- <l:Grid
+                        defaultSpan="L12 M12 S12"
+                        width="100%"
+                        hSpacing="1"
+                        vSpacing="1"
+                        class="sapUiContentPadding customFooter"
+                    >
+                        <VBox width="100%">
+                            <layoutData>
+                                <l:GridData span="L8 M12 S12" />
+                            </layoutData>
+                            <HBox
+                                alignItems="Center"
+                                wrap="Wrap"
+                            >
+                                <Text
+                                    text="Johnson&amp;Johnson"
+                                    class="customFooterBrand sapUiMediumMarginEnd"
+                                />
+                                <Link
+                                    text="Privacy Policy"
+                                    press="onPrivacyPress"
+                                    class="customFooterLink sapUiTinyMarginEnd"
+                                />
+                                <Text
+                                    text="|"
+                                    class="customFooterText sapUiTinyMarginEnd"
+                                />
+                                <Link
+                                    text="Terms of Use"
+                                    press="onTermsPress"
+                                    class="customFooterLink sapUiTinyMarginEnd"
+                                />
+                                <Text
+                                    text="|"
+                                    class="customFooterText sapUiTinyMarginEnd"
+                                />
+                                <Link
+                                    text="Release Notes"
+                                    press="onReleasePress"
+                                    class="customFooterLink"
+                                />
+                            </HBox>
+                        </VBox>
+                        <VBox width="100%">
+                            <layoutData>
+                                <l:GridData span="L4 M12 S12" />
+                            </layoutData>
+                            <Text
+                                text="© 2025 Johnson and Johnson Services, Inc."
+                                class="customFooterText"
+                                textAlign="End"
+                            />
+                        </VBox>
+                    </l:Grid> -->
                 </content>
+
+                <!-- <footer>
+                    <Toolbar
+                    >
+                        <HBox
+                            alignItems="Center"
+                            wrap="Wrap"
+                        >
+                            <Text
+                                text="Johnson&amp;Johnson"
+                                class="customFooterBrand sapUiMediumMarginEnd"
+                            />
+                            <Link
+                                text="Privacy Policy"
+                                press="onPrivacyPress"
+                                class="customFooterLink sapUiTinyMarginEnd"
+                            />
+                            <Text
+                                text="|"
+                                class="customFooterText sapUiTinyMarginEnd"
+                            />
+                            <Link
+                                text="Terms of Use"
+                                press="onTermsPress"
+                                class="customFooterLink sapUiTinyMarginEnd"
+                            />
+                            <Text
+                                text="|"
+                                class="customFooterText sapUiTinyMarginEnd"
+                            />
+                            <Link
+                                text="Release Notes"
+                                press="onReleasePress"
+                                class="customFooterLink"
+                            />
+                        </HBox>
+                        <ToolbarSpacer />
+                        <Text
+                            text="© 2025 Johnson and Johnson Services, Inc."
+                            class="customFooterText"
+                            textAlign="End"
+                        />
+                    </Toolbar>
+                </footer> -->
             </Page>
         </App>
     </Shell>

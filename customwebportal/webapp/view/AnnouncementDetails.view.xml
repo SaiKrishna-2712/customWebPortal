@@ -1,0 +1,11 @@
+<mvc:View
+    controllerName="com.inctue.customwebportal.controller.AnnouncementDetails"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+>
+    <Page title="Announcement Details">
+        <content>
+            <Text text="Announcment Details Page" />
+        </content>
+    </Page>
+</mvc:View>

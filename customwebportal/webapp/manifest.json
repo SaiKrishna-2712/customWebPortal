@@ -63,28 +63,51 @@
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
-        "controlAggregation": "content",
-        "controlId": "app",
+        "controlAggregation": "pages",
+        "controlId": "idMainApp",
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
         "path": "com.inctue.customwebportal.view",
         "async": true,
-        "viewPath": "com.inctue.customwebportal.view"
+        "viewPath": "com.inctue.customwebportal.view",
+        "clearControlAggregation": true
       },
       "routes": [
         {
           "name": "RouteApp",
-          "pattern": ":?query:",
+          "pattern": "",
           "target": [
             "TargetApp"
+          ]
+        },
+        {
+          "name": "RouteAnnouncementDetails",
+          "pattern": "announcements",
+          "target": [
+            "TargetAnnouncementDetails"
+          ]
+        },
+        {
+          "name": "RouteKnowledgeArticleDetails",
+          "pattern": "knowledge-articles",
+          "target": [
+            "TargetKnowledgeArticleDetails"
           ]
         }
       ],
       "targets": {
         "TargetApp": {
-          "id": "App",
+          "id": "AppMain",
           "name": "App"
+        },
+        "TargetAnnouncementDetails": {
+          "id": "AnnouncementDetails",
+          "name": "AnnouncementDetails"
+        },
+        "TargetKnowledgeArticleDetails": {
+          "id": "KnowledgeArticleDetails",
+          "name": "KnowledgeArticleDetails"
         }
       }
     },
