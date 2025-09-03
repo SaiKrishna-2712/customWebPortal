@@ -1,18 +1,17 @@
 /* 🔔 Global Announcement Bar */
-.customAnnouncementBar {
-    background-color: #e74c3c;
-    /* Red alert-style */
+.announcementBarCss {
+    background-color: #e74c3c; /* Red alert-style */
     color: white;
     font-weight: bold;
 }
 
-.customGreyBackground {
+.greyBackgroundCss {
     background-color: #e5e5e5;
 }
 
 
 /* Capsule style for tags */
-.announcementTag {
+.announcementTagCss {
     background-color: #edeaea;
     border-radius: 12px;
     padding: 2px 8px;
@@ -30,78 +29,56 @@
 }
 
 /* Footer Brand Text - Johnson&Johnson */
-.customFooterBrand {
+.footerBrandCss {
     font-size: 1rem !important;
     color: #d73027 !important;
     font-weight: 500 !important;
 }
 
-/* Footer Links */
-/* .customFooterLink {
-    font-size: 0.875rem !important;
-} */
-
-/* Footer Regular Text */
-/* .customFooterText {
-    font-size: 0.875rem !important;
-} */
 
 
-.customSectionTitle {
+.sectionTitleCss {
     font-size: 1.05rem !important;
     font-weight: bold !important;
 }
 
-/* .customFooter {
-    margin-top: 0 !important;
-    padding-top: 1rem !important;
-    border-top: 1px solid #e0e0e0;
-} */
-
-/* .lnkTxtCls{
-    text-decoration: none !important;
-    color: #0000EE !important;
-    font-weight: bold !important;
-} */
-.vwTxtCls{
+.viewsTextCss {
     font-style: italic;
 }
 
-.rightBorder {
-padding-right: 1rem !important;
-border-right: 1px solid #898989 !important;
+
+
+.rightBorderCss {
+    padding-right: 1rem !important;
+    border-right: 1px solid #898989 !important;
 }
 
 /* Banner container - consistent with cards */
-.bannerContainer {
+.bannerContainerCss {
     margin-left: 1rem;
     margin-right: 1rem;
     margin-top: 1rem;
 }
 
 /* Banner background */
-.bannerFlexBox {
+.bannerFlexBoxCss {
     background-image: url('../image/Weather_Banner.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 0.5rem;
-
 }
 
 /* Reduce bottom gap compared to content */
-.bannerFlexBox.sapUiSmallMarginBottom {
+.bannerFlexBoxCss.sapUiSmallMarginBottom {
     margin-bottom: 0.5rem !important;
 }
 
 /* Text styling */
-.bannerDateTemp {
+.bannerDateTempCss {
     font-weight: bold;
     color: white;
 }
 
-.bannerGreeting {
+.bannerGreetingCss {
     color: white;
 }
-
-
-

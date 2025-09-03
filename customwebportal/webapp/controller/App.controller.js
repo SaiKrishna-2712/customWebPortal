@@ -34,7 +34,7 @@ sap.ui.define([
                         subtitle: "SAP Official",
                         url: "https://www.sap.com",
                         icon: "sap-icon://hint",
-                        embedMode: "newtab",
+                        embedMode: "iframe",
                         active: true
                     },
                     {
@@ -90,7 +90,7 @@ sap.ui.define([
                         icon: "sap-icon://task",
                         embedMode: "newtab",
                         active: true
-                    }
+                    },
                 ]
             };
             var oTilesModel = new JSONModel(oTilesData);
@@ -201,10 +201,6 @@ sap.ui.define([
 
 
         },
-
-
-
-
         /**
          * Sets up responsive behavior for the scroll container
          */
@@ -575,7 +571,7 @@ sap.ui.define([
             var oHtml = this.byId("idApplicationFrameHtml");
 
             if (!oHtml) {
-                console.error("❌ idApplicationFrameHtml not found in the view");
+                console.error("idApplicationFrameHtml not found in the view");
                 this._openInNewTab(sUrl, sTitle);
                 return;
             }
@@ -614,7 +610,7 @@ sap.ui.define([
             // Timeout fallback (only for iframe mode)
             this._iframeLoadTimeout = setTimeout(function () {
                 if (!bLoaded) {
-                    console.log("❌ Iframe timeout for: " + sUrl);
+                    console.log("Iframe timeout for: " + sUrl);
                     MessageToast.show("This site cannot be embedded. Opening in new tab...");
                     that._openInNewTab(sUrl, sTitle);
                 }
@@ -626,7 +622,7 @@ sap.ui.define([
                 var loadingOverlay = document.getElementById("loadingOverlay_" + sIframeId);
 
                 if (!iframe) {
-                    console.error("❌ Iframe not found in DOM after injection");
+                    console.error("Iframe not found in DOM after injection");
                     that._openInNewTab(sUrl, sTitle);
                     return;
                 }
@@ -641,7 +637,7 @@ sap.ui.define([
                         loadingOverlay.style.display = "none";
                     }
 
-                    console.log("✅ Iframe loaded successfully: " + sUrl);
+                    console.log("Iframe loaded successfully: " + sUrl);
                     MessageToast.show(sTitle + " loaded successfully");
 
                     // Verify same-origin if possible
@@ -656,7 +652,7 @@ sap.ui.define([
                     bLoaded = true;
                     clearTimeout(that._iframeLoadTimeout);
 
-                    console.log("❌ Iframe error for: " + sUrl);
+                    console.log("Iframe error for: " + sUrl);
                     MessageToast.show("Failed to load " + sTitle + ". Opening in new tab...");
                     that._openInNewTab(sUrl, sTitle);
                 };
