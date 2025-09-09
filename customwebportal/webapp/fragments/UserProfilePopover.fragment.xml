@@ -4,21 +4,42 @@
 >
     <Popover
         id="userProfilePopover"
-        title="User Profile"
         placement="Bottom"
-        showHeader="true"
+        showHeader="false"
     >
         <content>
-            <VBox class="sapUiSmallMargin">
-                <ObjectIdentifier
-                    title="John Doe"
-                    text="john.doe@example.com"
+            <VBox>
+                <!-- Name and Email with padding -->
+                <VBox class="sapUiNoMargin sapUiContentPadding sapUiNoMarginBegin">
+                    <Text
+                        text="John Doe"
+                        class="sapMText"
+                    />
+
+                    <Text
+                        text="john.doe@jnj.com"
+                        class="sapMText"
+                    />
+                </VBox>
+
+                <!-- Horizontal separator line covering full width -->
+                <core:HTML
+                    content="&lt;hr style='border: none; border-top: 1px solid #d9d9d9; margin: 4px 0; width: 100%;' /&gt;"
                 />
 
-                <ObjectStatus
-                    text="Build Version: 1.0.3"
-                    state="Information"
-                />
+                <!-- Build version with padding and styling -->
+                <HBox
+                    width="100%"
+                    justifyContent="Center"
+                    alignItems="Center"
+                    class="sapUiTinyMarginBottom"
+                >
+                    <Text
+                        text="Build Version: 1.0.3"
+                        class="sapMTextSmall buildVersionText"
+                        textAlign="Center"
+                    />
+                </HBox>
             </VBox>
         </content>
     </Popover>

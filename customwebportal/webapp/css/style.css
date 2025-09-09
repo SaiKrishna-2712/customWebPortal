@@ -1,10 +1,24 @@
 /* 🔔 Global Announcement Bar */
 .announcementBarCss {
     background-color: #e74c3c; /* Red alert-style */
-    color: white;
     font-weight: bold;
 }
 
+.announcementTxtCss{
+    color:white;
+}
+.shellBarCss .sapFShellBarHomeIcon {
+    width: 40px !important;
+    height: 40px !important;
+    object-fit: contain;
+}
+
+/* CSS for Build Version Text in User Profile Popover */
+.buildVersionText {
+    color: #0070f2 !important;
+    font-size: 0.75rem !important;
+    font-weight: 400 !important;
+}
 .greyBackgroundCss {
     background-color: #e5e5e5;
 }
@@ -32,7 +46,7 @@
 .footerBrandCss {
     font-size: 1rem !important;
     color: #d73027 !important;
-    font-weight: 500 !important;
+    font-weight: bold;
 }
 
 
@@ -82,3 +96,66 @@
 .bannerGreetingCss {
     color: white;
 }
+
+/* Floating circular FAQ button */
+.faqFloatingBtnCss {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 60px !important;
+    min-height: 60px !important;
+    border-radius: 50% !important;
+    background-color: #e60000 !important;
+    border: none !important;
+    z-index: 9999 !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Override SAPUI5 button inner container */
+.faqFloatingBtnCss .sapMBtnInner {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 50% !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Override button content */
+.faqFloatingBtnCss .sapMBtnContent {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* FAQ text styling */
+.faqFloatingBtnCss .sapMBtnText {
+    color: #ffffff !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    line-height: 1 !important;
+}
+
+
+
+/* Hover effect for the main button */
+.faqFloatingBtnCss:hover {
+    background-color: #cc0000 !important;
+    transform: scale(1.05) !important;
+    transition: all 0.2s ease !important;
+}
+
+

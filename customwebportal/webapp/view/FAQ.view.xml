@@ -1,0 +1,64 @@
+<mvc:View
+    controllerName="com.inctue.customwebportal.controller.FAQ"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <!-- Floating FAQ Button with Text -->
+    <Button
+        id="faqBtnUI5"
+        text="FAQ"
+        press=".onOpenFAQ"
+        type="Emphasized"
+        tooltip="FAQ"
+        class="faqFloatingBtnCss"
+    />
+
+    <!-- FAQ Dialog -->
+    <Dialog
+        id="faqDialog"
+        title="Top FAQs"
+        class="sapUiContentPadding"
+        contentWidth="350px"
+        contentHeight="auto"
+        draggable="true"
+        resizable="true"
+    >
+        <List items="{faqModel>/faqs}">
+            <CustomListItem>
+                <HBox
+                    alignItems="Center"
+                    justifyContent="SpaceBetween"
+                    width="100%"
+                >
+                    <Text
+                        text="{faqModel>question}"
+                        wrapping="true"
+                    />
+                    <Button
+                        icon="sap-icon://navigation-right-arrow"
+                        type="Transparent"
+                    />
+                </HBox>
+            </CustomListItem>
+        </List>
+
+        <endButton>
+            <Button
+                text="Close"
+                press=".onCloseDialog"
+            />
+        </endButton>
+        <customHeader>
+            <Toolbar>
+                <Title text="Top FAQs" />
+                <!-- <ToolbarSpacer />
+                <Button
+                    icon="sap-icon://decline"
+                    type="Transparent"
+                    press=".onCloseDialog"
+                /> -->
+            </Toolbar>
+        </customHeader>
+    </Dialog>
+</mvc:View>

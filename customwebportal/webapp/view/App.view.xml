@@ -34,7 +34,7 @@
                             <Text
                                 id="idGlobalAnnouncementTxt"
                                 text="{i18n>globalAnnouncementText}"
-                                class="sapUiSmallMargin"
+                                class="sapUiSmallMargin announcementTxtCss"
                             />
                             <ToolbarSpacer />
                         </Toolbar>
@@ -448,17 +448,24 @@
                                         </HBox>
                                     </VBox>
                                     <!-- FAQ Section -->
-                                    <Panel
+                                    <!-- <Panel
                                         headerText="{i18n>faqSectionTitle}"
                                         expandable="false"
                                         expanded="true"
                                         width="100%"
                                     >
-                                        <VBox id="faqList" />
-                                    </Panel>
+                                        <VBox id="idfaqVBox" />
+                                    </Panel> -->
                                 </VBox>
                             </l:Grid>
                         </VBox>
+                    </VBox>
+                    <VBox class="sapUiMediumMarginBottom">
+                        <mvc:XMLView
+                            id="faqView"
+                            viewName="com.inctue.customwebportal.view.FAQ"
+                            xmlns:mvc="sap.ui.core.mvc"
+                        />
                     </VBox>
 
                     <!-- Footer -->

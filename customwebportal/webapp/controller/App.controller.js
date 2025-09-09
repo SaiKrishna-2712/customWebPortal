@@ -169,34 +169,34 @@ sap.ui.define([
             // Handle window resize for responsive behavior
             this._attachResizeHandler();
 
-            const oVBox = this.byId("faqList");
+            // const oVBox = this.byId("idfaqVBox");
 
-            // Array of FAQs
-            const aFAQs = [
-                { question: "What is Workzone Advanced?", answer: "SAP Build Work Zone, advanced edition, is a digital workplace solution that empowers users to access business applications, processes, and information from a single, unified entry point." },
-                { question: "What are the roles in SAP Build Work Zone, advanced edition?", answer: "There are three types of roles in SAP Build Work Zone, advanced edition: default roles that are assigned automatically during the onboarding process, local roles that are created manually to allow access to local apps, and remote roles that are added from remote content providers" },
-                { question: "What is the benefit of SAP work zone?", answer: "SAP Work Zone includes built- in launchpad and allows to access all business apps from one place. Identity propagation eliminates a need to setup additional security roles for SAP business apps." },
-                { question: "What is the benefit of SAP work zone?", answer: "SAP Work Zone includes built- in launchpad and allows to access all business apps from one place. Identity propagation eliminates a need to setup additional security roles for SAP business apps." },
-                { question: "What is the benefit of SAP work zone?", answer: "SAP Work Zone includes built- in launchpad and allows to access all business apps from one place. Identity propagation eliminates a need to setup additional security roles for SAP business apps." }
+            // // Array of FAQs
+            // const aFAQs = [
+            //     { question: "What is Workzone Advanced?", answer: "SAP Build Work Zone, advanced edition, is a digital workplace solution that empowers users to access business applications, processes, and information from a single, unified entry point." },
+            //     { question: "What are the roles in SAP Build Work Zone, advanced edition?", answer: "There are three types of roles in SAP Build Work Zone, advanced edition: default roles that are assigned automatically during the onboarding process, local roles that are created manually to allow access to local apps, and remote roles that are added from remote content providers" },
+            //     { question: "What is the benefit of SAP work zone?", answer: "SAP Work Zone includes built- in launchpad and allows to access all business apps from one place. Identity propagation eliminates a need to setup additional security roles for SAP business apps." },
+            //     { question: "What is the benefit of SAP work zone?", answer: "SAP Work Zone includes built- in launchpad and allows to access all business apps from one place. Identity propagation eliminates a need to setup additional security roles for SAP business apps." },
+            //     { question: "What is the benefit of SAP work zone?", answer: "SAP Work Zone includes built- in launchpad and allows to access all business apps from one place. Identity propagation eliminates a need to setup additional security roles for SAP business apps." }
 
-            ];
+            // ];
 
-            // Loop through FAQs and create panels
-            aFAQs.forEach(faq => {
-                // Create Text control with custom style class
-                const oText = new sap.m.Text({
-                    text: faq.answer
-                });
-                // Create expandable panel with the text
-                const oPanel = new sap.m.Panel({
-                    headerText: faq.question,
-                    expandable: true,
-                    expanded: false,
-                    content: [oText]
-                });
-                // Add panel to VBox
-                oVBox.addItem(oPanel);
-            });
+            // // Loop through FAQs and create panels
+            // aFAQs.forEach(faq => {
+            //     // Create Text control with custom style class
+            //     const oText = new sap.m.Text({
+            //         text: faq.answer
+            //     });
+            //     // Create expandable panel with the text
+            //     const oPanel = new sap.m.Panel({
+            //         headerText: faq.question,
+            //         expandable: true,
+            //         expanded: false,
+            //         content: [oText]
+            //     });
+            //     // Add panel to VBox
+            //     oVBox.addItem(oPanel);
+            // });
 
 
 
@@ -252,7 +252,7 @@ sap.ui.define([
                 method: "GET",
                 success: function (oData) {
                     var sTemp = Math.round(oData.main.temp) + "°C";
-                    oBannerModel.setProperty("/dateTemp", sDateStr + " | " + sTemp);
+                    oBannerModel.setProperty("/dateTemp", sDateStr);
                 },
                 error: function () {
                     // fallback if API fails
