@@ -9,25 +9,25 @@
     >
         <content>
             <VBox>
-                <!-- Name and Email with padding -->
+                <!-- Name and Email -->
                 <VBox class="sapUiNoMargin sapUiContentPadding sapUiNoMarginBegin">
                     <Text
                         text="John Doe"
-                        class="sapMText"
+                        class="userNameText"
                     />
 
                     <Text
                         text="john.doe@jnj.com"
-                        class="sapMText"
+                        class="userEmailText"
                     />
                 </VBox>
 
-                <!-- Horizontal separator line covering full width -->
+                <!-- Horizontal separator line -->
                 <core:HTML
                     content="&lt;hr style='border: none; border-top: 1px solid #d9d9d9; margin: 4px 0; width: 100%;' /&gt;"
                 />
 
-                <!-- Build version with padding and styling -->
+                <!-- Build version -->
                 <HBox
                     width="100%"
                     justifyContent="Center"
@@ -36,7 +36,7 @@
                 >
                     <Text
                         text="Build Version: 1.0.3"
-                        class="sapMTextSmall buildVersionText"
+                        class="buildVersionText"
                         textAlign="Center"
                     />
                 </HBox>

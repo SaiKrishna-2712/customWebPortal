@@ -17,33 +17,22 @@ sap.ui.define([
             };
             this.getView().setModel(new JSONModel(oData), "faqModel");
 
-            // ✅ Move delegate to the VIEW, not the HTML control
-            var that = this;
+            // Attach draggable after rendering
             this.getView().addEventDelegate({
-                onAfterRendering: function () {
-                    var oBtn = document.getElementById("faqBtn");
+                onAfterRendering: () => {
+                    const oBtn = this.byId("faqBtnUI5");
                     if (oBtn) {
-                        oBtn.onclick = function () {
-                            that.onOpenFAQ();
-                        };
-                        that._makeDraggable(oBtn);
+                        this._makeDraggable(oBtn.getDomRef());
                     }
                 }
             });
         },
 
         onOpenFAQ: function () {
-            var oDialog = this.byId("faqDialog");
-            if (oDialog) {
-                oDialog.open();
+            if (!this._oPopover) {
+                this._oPopover = this.byId("faqPopover");
             }
-        },
-
-        onCloseDialog: function () {
-            var oDialog = this.byId("faqDialog");
-            if (oDialog) {
-                oDialog.close();
-            }
+            this._oPopover.openBy(this.byId("faqBtnUI5"));
         },
 
         _makeDraggable: function (el) {
@@ -64,6 +53,7 @@ sap.ui.define([
                 pos2 = pos4 - e.clientY;
                 pos3 = e.clientX;
                 pos4 = e.clientY;
+
                 el.style.top = (el.offsetTop - pos2) + "px";
                 el.style.left = (el.offsetLeft - pos1) + "px";
                 el.style.bottom = "auto"; // prevent snapping back

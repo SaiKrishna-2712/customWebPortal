@@ -43,7 +43,7 @@
                         <f:ShellBar
                             id="idMainShellBar"
                             title="{i18n>webPortalTitle}"
-                            homeIcon="./image/jng_logo.png"
+                            homeIcon="./image/JJ_Logo_Stacked_Red_RGB.png"
                             showNotifications="false"
                             showProductSwitcher="false"
                             class="shellBarCss"
@@ -157,14 +157,18 @@
                                             horizontal="false"
                                             focusable="false"
                                         >
-                                            <l:Grid
-                                                id="idApplicationsTileGrid"
-                                                defaultSpan="L3 M6 S12"
+                                            <VBox
+                                                alignItems="Center"
                                                 width="100%"
-                                                hSpacing="1"
-                                                vSpacing="1"
-                                                class="sapUiResponsiveContentPadding"
-                                            />
+                                            >
+                                                <l:Grid
+                                                    id="idApplicationsTileGrid"
+                                                    defaultSpan="L3 M6 S12"
+                                                    hSpacing="1"
+                                                    vSpacing="1"
+                                                    class="customTileGrid"
+                                                />
+                                            </VBox>
                                         </ScrollContainer>
 
                                         <core:HTML
@@ -477,16 +481,22 @@
                             class="sapUiResponsiveContentPadding greyBackgroundCss"
                         >
                             <content>
-                                <!-- Left side content - Company name and links -->
+                                <!-- Left side content - Company Logo and links -->
                                 <HBox
                                     alignItems="Center"
                                     wrap="Wrap"
                                     class="sapUiResponsiveMargin"
                                 >
-                                    <Text
-                                        text="{i18n>companyNameText}"
-                                        class="footerBrandCss sapUiTinyMarginEnd"
+                                    <!-- Replace company name text with logo -->
+                                    <Image
+                                        src="image/JJ_Logo_SingleLine_Red_RGB.png"
+                                        alt="JnJ Logo"
+                                        densityAware="false"
+                                        class="sapUiTinyMarginEnd"
+                                        width="130px"
+                                        height="25px"
                                     />
+
                                     <Link
                                         text="{i18n>privacyPolicyText}"
                                         press="onPrivacyPress"

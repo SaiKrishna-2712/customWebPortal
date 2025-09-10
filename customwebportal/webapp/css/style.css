@@ -8,21 +8,33 @@
     color:white;
 }
 .shellBarCss .sapFShellBarHomeIcon {
-    width: 40px !important;
-    height: 40px !important;
-    object-fit: contain;
+    max-height: 5rem !important;
+    height: 3.5rem !important;
 }
 
-/* CSS for Build Version Text in User Profile Popover */
-.buildVersionText {
-    color: #0070f2 !important;
-    font-size: 0.75rem !important;
-    font-weight: 400 !important;
+.userNameText {
+    font-size: 1.2rem;  /* biggest */
+    font-weight: bold;
 }
+
+.userEmailText {
+    font-size: 1rem;    /* smaller than name */
+    color: #555;        /* optional for better contrast */
+}
+
+.buildVersionText {
+    font-size: 0.75rem; /* smallest */
+    color: #0070f2 ;        /* lighter look */
+}
+
 .greyBackgroundCss {
     background-color: #e5e5e5;
 }
 
+.customTileGrid {
+    max-width: 80rem; /* ~1280px → fits 4 tiles nicely */
+    margin: 0 auto;   /* centers the grid */
+}
 
 /* Capsule style for tags */
 .announcementTagCss {
@@ -42,12 +54,6 @@
     /* Prevent tags from breaking into multiple lines */
 }
 
-/* Footer Brand Text - Johnson&Johnson */
-.footerBrandCss {
-    font-size: 1rem !important;
-    color: #d73027 !important;
-    font-weight: bold;
-}
 
 
 
@@ -99,7 +105,7 @@
 
 /* Floating circular FAQ button */
 .faqFloatingBtnCss {
-    position: fixed !important;
+    position: absolute !important;
     bottom: 20px !important;
     right: 20px !important;
     width: 60px !important;
@@ -109,10 +115,21 @@
     border-radius: 50% !important;
     background-color: #e60000 !important;
     border: none !important;
-    z-index: 9999 !important;
+    z-index: 9999999 !important;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
     padding: 0 !important;
     margin: 0 !important;
+    cursor: grab !important; /* shows draggable */
+}
+
+body > #faqBtnUI5 {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 999999 !important;
+}
+.faqFloatingBtnCss:active {
+    cursor: grabbing !important;
 }
 
 /* Override SAPUI5 button inner container */
@@ -120,23 +137,11 @@
     background: transparent !important;
     border: none !important;
     border-radius: 50% !important;
-    box-shadow: none !important;
     width: 100% !important;
     height: 100% !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-/* Override button content */
-.faqFloatingBtnCss .sapMBtnContent {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    height: 100% !important;
 }
 
 /* FAQ text styling */
@@ -149,13 +154,12 @@
     line-height: 1 !important;
 }
 
-
-
-/* Hover effect for the main button */
+/* Hover effect */
 .faqFloatingBtnCss:hover {
     background-color: #cc0000 !important;
     transform: scale(1.05) !important;
     transition: all 0.2s ease !important;
 }
+
 
 
