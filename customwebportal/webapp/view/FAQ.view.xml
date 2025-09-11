@@ -25,20 +25,30 @@
         <content>
             <List items="{faqModel>/faqs}">
                 <CustomListItem>
-                    <HBox
-                        alignItems="Center"
-                        justifyContent="SpaceBetween"
-                        width="100%"
-                    >
+                    <VBox width="100%">
+                        <HBox
+                            alignItems="Center"
+                            justifyContent="SpaceBetween"
+                            width="100%"
+                        >
+                            <Text
+                                text="{faqModel>question}"
+                                wrapping="true"
+                            />
+                            <Button
+                                icon="{= ${faqModel>expanded} ? 'sap-icon://navigation-down-arrow' : 'sap-icon://navigation-right-arrow'}"
+                                type="Transparent"
+                                press=".onToggleFAQ"
+                            />
+                        </HBox>
+                        <!-- Answer shown only when expanded -->
                         <Text
-                            text="{faqModel>question}"
+                            text="{faqModel>answer}"
+                            visible="{faqModel>expanded}"
                             wrapping="true"
+                            class="sapUiTinyMarginTop"
                         />
-                        <Button
-                            icon="sap-icon://navigation-right-arrow"
-                            type="Transparent"
-                        />
-                    </HBox>
+                    </VBox>
                 </CustomListItem>
             </List>
         </content>

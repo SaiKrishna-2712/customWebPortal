@@ -477,60 +477,59 @@
                         class="sapUiContentPadding"
                         backgroundDesign="Transparent"
                     >
-                        <Toolbar
+                        <OverflowToolbar
                             class="sapUiResponsiveContentPadding greyBackgroundCss"
                         >
-                            <content>
-                                <!-- Left side content - Company Logo and links -->
-                                <HBox
-                                    alignItems="Center"
-                                    wrap="Wrap"
-                                    class="sapUiResponsiveMargin"
-                                >
-                                    <!-- Replace company name text with logo -->
-                                    <Image
-                                        src="image/JJ_Logo_SingleLine_Red_RGB.png"
-                                        alt="JnJ Logo"
-                                        densityAware="false"
-                                        class="sapUiTinyMarginEnd"
-                                        width="130px"
-                                        height="25px"
-                                    />
-
-                                    <Link
-                                        text="{i18n>privacyPolicyText}"
-                                        press="onPrivacyPress"
-                                        class="footerLinkCss sapUiTinyMarginEnd"
-                                    />
-                                    <Text
-                                        text="|"
-                                        class="footerTextCss sapUiTinyMarginEnd"
-                                    />
-                                    <Link
-                                        text="{i18n>termsOfUseText}"
-                                        press="onTermsPress"
-                                        class="footerLinkCss sapUiTinyMarginEnd"
-                                    />
-                                    <Text
-                                        text="|"
-                                        class="footerTextCss sapUiTinyMarginEnd"
-                                    />
-                                    <Link
-                                        text="{i18n>releaseNotesText}"
-                                        press="onReleasePress"
-                                        class="footerLinkCss"
-                                    />
-                                </HBox>
-
-                                <ToolbarSpacer />
-
-                                <Text
-                                    text="{i18n>copyrightText}"
-                                    class="footerTextCss sapUiResponsiveMargin"
-                                    textAlign="End"
+                            <!-- Left side content - Company Logo and links -->
+                            <HBox
+                                alignItems="Center"
+                                wrap="Wrap"
+                                class="sapUiResponsiveMargin"
+                            >
+                                <Image
+                                    src="image/JJ_Logo_SingleLine_Red_RGB.png"
+                                    alt="JnJ Logo"
+                                    densityAware="false"
+                                    class="sapUiTinyMarginEnd"
+                                    width="130px"
+                                    height="25px"
                                 />
-                            </content>
-                        </Toolbar>
+
+                                <Link
+                                    text="{i18n>privacyPolicyText}"
+                                    press="onPrivacyPress"
+                                    class="footerLinkCss sapUiTinyMarginEnd"
+                                />
+                                <Text
+                                    text="|"
+                                    class="footerTextCss sapUiTinyMarginEnd"
+                                />
+
+                                <Link
+                                    text="{i18n>termsOfUseText}"
+                                    press="onTermsPress"
+                                    class="footerLinkCss sapUiTinyMarginEnd"
+                                />
+                                <Text
+                                    text="|"
+                                    class="footerTextCss sapUiTinyMarginEnd"
+                                />
+
+                                <Link
+                                    text="{i18n>releaseNotesText}"
+                                    press="onReleasePress"
+                                    class="footerLinkCss"
+                                />
+                            </HBox>
+
+                            <ToolbarSpacer />
+
+                            <Text
+                                text="{i18n>copyrightText}"
+                                class="footerTextCss sapUiResponsiveMargin"
+                                textAlign="End"
+                            />
+                        </OverflowToolbar>
                     </VBox>
                 </content>
             </Page>

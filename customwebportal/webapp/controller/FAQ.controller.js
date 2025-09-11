@@ -6,18 +6,16 @@ sap.ui.define([
 
     return Controller.extend("com.inctue.customwebportal.controller.FAQ", {
         onInit: function () {
-            // Sample FAQ data
             var oData = {
                 faqs: [
-                    { question: "What is DHO?" },
-                    { question: "What does Virtual vs. Persistent Model mean?" },
-                    { question: "How do I convert to Constant Currency or As Reported Currency?" },
-                    { question: "What is changing relating to data with DHO optimization?" }
+                    { question: "What is DHO?", answer: "DHO stands for ...", expanded: false },
+                    { question: "What does Virtual vs. Persistent Model mean?", answer: "Virtual model is ... Persistent model is ...", expanded: false },
+                    { question: "How do I convert to Constant Currency or As Reported Currency?", answer: "You can convert using ...", expanded: false },
+                    { question: "What is changing relating to data with DHO optimization?", answer: "With optimization ...", expanded: false }
                 ]
             };
-            this.getView().setModel(new JSONModel(oData), "faqModel");
+            this.getView().setModel(new sap.ui.model.json.JSONModel(oData), "faqModel");
 
-            // Attach draggable after rendering
             this.getView().addEventDelegate({
                 onAfterRendering: () => {
                     const oBtn = this.byId("faqBtnUI5");
@@ -28,12 +26,24 @@ sap.ui.define([
             });
         },
 
-        onOpenFAQ: function () {
-            if (!this._oPopover) {
-                this._oPopover = this.byId("faqPopover");
-            }
-            this._oPopover.openBy(this.byId("faqBtnUI5"));
+        onToggleFAQ: function (oEvent) {
+            var oCtx = oEvent.getSource().getBindingContext("faqModel");
+            var bExpanded = oCtx.getProperty("expanded");
+
+            // Toggle expanded flag
+            oCtx.getModel().setProperty(oCtx.getPath() + "/expanded", !bExpanded);
         },
+
+        onOpenFAQ: function (oEvent) {
+            var oPopover = this.byId("faqPopover");
+
+            if (oPopover.isOpen()) {
+                oPopover.close();
+            } else {
+                oPopover.openBy(this.byId("faqBtnUI5"));
+            }
+        },
+
 
         _makeDraggable: function (el) {
             let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
